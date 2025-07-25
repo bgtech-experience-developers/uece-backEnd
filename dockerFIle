@@ -1,0 +1,25 @@
+# Usa imagem base com Node.js 20 (compatível com NestJS 11)
+FROM node:20-alpine
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+# Copia apenas os arquivos de dependências primeiro (melhor pro cache)
+COPY package*.json ./
+
+# Instala as dependências com a flag --legacy-peer-deps
+RUN npm install --legacy-peer-deps
+
+# Copia o restante do projeto pro container
+COPY . .
+
+# Gera os arquivos do Prisma Client
+RUN npx prisma generate
+
+# Gera o build da aplicação
+RUN npm run build
+
+# Expõe a porta correta da sua aplicação
+EXPOSE 3001
+
+# Comando pra iniciar a aplicação
+CMD ["npm", "run", "start"]
