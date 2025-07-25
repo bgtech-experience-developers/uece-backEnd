@@ -8,3 +8,59 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model users {
+  id String @id() @db.Uuid()
+  name String
+  mother_name String
+  cpf String @unique()
+  email String 
+  data_birth DateTime
+
+  course_user courses_users[]
+
+  created_at DateTime @default(now())
+  update_at DateTime @updatedAt()
+  @@index([email])
+}
+
+model courses {
+  id String @id() @db.Uuid()
+  name String
+  registration_fee Decimal
+  number_vacancies Int
+
+  course_user courses_users[]
+  address_id String
+
+  created_at DateTime @default(now())
+  update_at DateTime @updatedAt()
+
+  address address @relation(fields: [address_id], references: [id], onUpdate: Cascade) 
+}
+
+model address {
+  id            String @id @default(uuid())
+  cep           String @db.VarChar(8) @unique()
+  state         String @db.VarChar(25)
+  city          String @db.VarChar(50)
+  neighborhood  String @db.VarChar(50)
+  street_adress String @db.VarChar(50)
+  number        String @db.VarChar(10)
+  courses       courses[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt()
+
+}
+
+model courses_users {
+  user_id String @db.Uuid()
+  course_id String @db.Uuid()
+
+  user users @relation(fields: [user_id], references: [id])
+  course courses @relation(fields: [course_id], references: [id])
+
+  @@id([user_id, course_id])
+
+}
