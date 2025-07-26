@@ -1,15 +1,16 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { UserRepository } from "./user.repository";
 import { CreateUserDTO } from "./dto/createUserDto";
+import { UserDto } from "./dto/userDto";
 
 @Injectable()
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
 
-    async createUser(data: CreateUserDTO) {
+    async createUser(data: UserDto, addressId: string) {
          
-        await this.findByCPF(data.cpf);
-        return await this.userRepository.save(data);
+       const user = this.userRepository.save(data, addressId);
+
     }
 
     async findByCPF(cpf: string) {
@@ -19,5 +20,9 @@ export class UserService {
             throw new BadRequestException('Usuário já cadastrado');
         }
         return userExists;
+    }
+
+    async associateUserCourse(userId: string, courseId: string) {
+        await this.userRepository.associateUserCourse(userId, courseId)
     }
 }

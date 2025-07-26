@@ -1,21 +1,14 @@
 import { Type } from "class-transformer";
-import { IsDate, IsDateString, IsEmail, IsString } from "class-validator";
+import { IsDate, IsDateString, IsEmail, IsString, ValidateNested } from "class-validator";
+import { CreateAddressDto } from "src/module/address/dto/createAddressDto";
+import { UserDto } from "./userDto";
 
 export class CreateUserDTO {
+    @ValidateNested()
+    @Type(() => UserDto)
+    user: UserDto
 
-    @IsString()
-    name: string
-
-    @IsString()
-    mother_name: string
-
-    @IsString()
-    cpf: string
-
-    @IsEmail()
-    email: string   
-
-    @Type(() => Date)
-    @IsDate()
-    data_birth: Date
+    @ValidateNested()
+    @Type(() => CreateAddressDto)
+    address: CreateAddressDto
 }
