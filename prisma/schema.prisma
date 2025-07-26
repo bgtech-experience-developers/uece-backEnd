@@ -1,7 +1,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -10,7 +9,7 @@ datasource db {
 }
 
 model users {
-  id String @id() @db.Uuid()
+  id String @id() @default(uuid())
   name String
   mother_name String
   cpf String @unique()
@@ -25,7 +24,7 @@ model users {
 }
 
 model courses {
-  id String @id() @db.Uuid()
+  id String @id() @default(uuid())
   name String
   registration_fee Decimal
   number_vacancies Int
@@ -55,9 +54,8 @@ model address {
 }
 
 model courses_users {
-  user_id String @db.Uuid()
-  course_id String @db.Uuid()
-
+  user_id String 
+  course_id String 
   user users @relation(fields: [user_id], references: [id])
   course courses @relation(fields: [course_id], references: [id])
 
