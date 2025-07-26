@@ -9,10 +9,10 @@ export class CourseRepository {
     return this.prisma.courses.findMany({
       select: {
         id: true,
-        course_name: true,  // ajusta aqui se o campo correto for esse
-        price_registration: true,
-        adress_id: true,
-        amount_vacancy: true,
+      name: true,  // ajusta aqui se o campo correto for esse
+       registration_fee: true,
+        address_id: true,
+        number_vacancies: true,
       },
     });
   }

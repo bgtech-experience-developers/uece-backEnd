@@ -7,7 +7,7 @@ import { PrismaModule } from './infra/database/prisma/prisma.module';
 import { UserModule } from './module/users/user.module';
 
 @Module({
-   imports: [PrismaModule,CourseModule,UserModule],
+   imports: [CourseModule,UserModule,PrismaModule],
   controllers: [AppController],
   providers: [AppService],
 })
