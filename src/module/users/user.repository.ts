@@ -1,3 +1,4 @@
+
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/service/prisma.service";
 import { CreateUserDTO } from "./dto/createUserDto";
@@ -14,9 +15,6 @@ export class UserRepository {
             data: {
                 ...data,
                 address_id: addressId
-            },
-            omit: {
-                update_at: true
             }
         })
     }
@@ -37,4 +35,13 @@ export class UserRepository {
             }
         })
     }
+
+      async findById(id: string) {
+    return this.prismaService.users.findUnique({ where: { id } });
+  }
+
+  async deleteById(id: string) {
+    return this.prismaService.users.delete({ where: { id } });
+  }
 }
+

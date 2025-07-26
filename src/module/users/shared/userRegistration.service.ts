@@ -2,17 +2,23 @@ import { Injectable } from "@nestjs/common";
 import { AddressService } from "src/module/address/address.service";
 import { UserService } from "../user.service";
 import { CreateUserDTO } from "../dto/createUserDto";
+import { CourseService } from "src/module/courses/course.service";
 
 @Injectable()
-export class UserRegistration {
-    constructor(private readonly addressService: AddressService, private readonly userService: UserService) {}
+export class UserRegistrationService {
+    constructor(
+        private readonly addressService: AddressService, 
+        private readonly userService: UserService, 
+        private readonly courseService: CourseService) {}
 
-    async registrateUser(data: CreateUserDTO) {
-        await this.userService.findByCPF(data.user.cpf);
+    async registrateUser(data: CreateUserDTO, courseId: string) {
+        await this.courseService.findByIdExists(courseId);
+
+        await this.userService.findByCPFExist(data.user.cpf);
+
         const address = await this.addressService.createAddress(data.address);
-        await this.userService.createUser(data.user, address.id)
-
-        //chamar o metodo de associatecourses
-        //validar a existencia do course
+        const user = await this.userService.createUser(data.user, address.id)
+        
+        await this.userService.associateUserCourse(user.id, courseId);
     }
 }
