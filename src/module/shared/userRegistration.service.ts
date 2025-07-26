@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { AddressService } from "src/module/address/address.service";
-import { UserService } from "../user.service";
-import { CreateUserDTO } from "../dto/createUserDto";
+import { UserService } from "../users/user.service";
+import { CreateUserDTO } from "../users/dto/createUserDto";
 import { CourseService } from "src/module/courses/course.service";
 
 @Injectable()
