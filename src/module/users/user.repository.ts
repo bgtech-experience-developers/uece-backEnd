@@ -36,12 +36,20 @@ export class UserRepository {
         })
     }
 
-      async findById(id: string) {
+    async findById(id: string) {
     return this.prismaService.users.findUnique({ where: { id } });
-  }
+    }
 
-  async deleteById(id: string) {
+    async deleteById(id: string) {
     return this.prismaService.users.delete({ where: { id } });
-  }
+    }
+
+    async findByEmail(email: string) {
+        return await this.prismaService.users.findFirst({
+            where: {
+                email
+            }
+        })
+    }
 }
 

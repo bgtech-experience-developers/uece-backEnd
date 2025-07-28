@@ -4,6 +4,7 @@ import { UserRepository } from "./user.repository";
 import { CreateUserDTO } from "./dto/createUserDto";
 import { UserDto } from "./dto/userDto";
 import { createdUser } from "./types/userCreated";
+import { findUnique } from "./types/findUnique";
 
 @Injectable()
 export class UserService {
@@ -36,5 +37,9 @@ export class UserService {
     }
 
     await this.userRepository.deleteById(id);
-  }
+    }
+
+    async findByEmail(email: string): Promise<findUnique | null> {
+      return await this.userRepository.findByEmail(email);
+    }
 }
