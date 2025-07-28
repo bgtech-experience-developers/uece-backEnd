@@ -4,10 +4,11 @@ import { UserRegistrationService } from "./userRegistration.service";
 import { CourseModule } from "src/module/courses/course.module";
 import { UserModule } from "../users/user.module";
 import { UserRegistrationController } from "./userRegistration.controller";
+import { BcryptService } from "src/service/bcrypt.service";
 
 @Module({
     controllers: [UserRegistrationController],
-    imports: [AddressModule, CourseModule, UserModule],
-    providers: [UserRegistrationService]
+    providers: [UserRegistrationService, BcryptService],
+    imports: [AddressModule, CourseModule, UserModule]
 })
 export class UserRegistrationModule {}
