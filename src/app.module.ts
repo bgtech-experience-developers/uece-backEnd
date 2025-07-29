@@ -8,7 +8,7 @@ import { UserRegistrationModule } from './module/shared/userRegistration.module'
 import { AuthModule } from './module/auth/auth.module';
 
 @Module({
-  imports: [CourseModule,UserModule, UserRegistrationModule, AuthModule],
+  imports: [CourseModule, UserModule, UserRegistrationModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

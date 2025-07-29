@@ -8,10 +8,6 @@ export class CourseController {
   @Get()
   async getCourses() {
     const courses = await this.courseService.listCourses();
-    // Renomeia 'name' para 'course_name' no retorno
-    return courses.map(course => ({
-      id: course.id,
-      course_name: course.name,
-    }));
+    return courses
   }
 }
