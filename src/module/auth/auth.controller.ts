@@ -1,7 +1,10 @@
-import { Body, Controller, Get, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Post, Res, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/loginDto";
 import { Response } from "express";
+import { RefreshTokenGuard } from "./guard/refreshToken.guard";
+import { User } from "src/decorator/req.user.decorator";
+import { payloadUser } from "src/interfaces/payloadUser.interface";
 
 @Controller('auth')
 export class AuthController {
@@ -20,9 +23,9 @@ export class AuthController {
         return dataResponse
     }
 
-    @Get()
-    async oi() {
-        return 'Oi som'
+    @UseGuards(RefreshTokenGuard)
+    @Post('/refresh-token')
+    async refreshToken(@User() user: payloadUser) {
+        return await this.authService.issueTokenAcess<payloadUser>(user);
     }
-    
 }   

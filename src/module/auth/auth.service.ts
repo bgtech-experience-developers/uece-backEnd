@@ -28,10 +28,10 @@ export class AuthService {
     }
 
     async issueTokenAcess<T extends object>(data: T): Promise<string> {
-        return await this.jwtService.generateToken(data, {expiresIn: process.env.ACCESS_EXPIRE!, privateKey: process.env.ACCESS_TOKEN!} ) 
+        return await this.jwtService.generateToken(data, {expiresIn: process.env.ACCESS_EXPIRE!, secret: process.env.ACCESS_TOKEN!} ) 
     }
 
     async issueRefreshToken<T extends object>(data: T): Promise<string> {
-        return await this.jwtService.generateToken(data, {expiresIn: process.env.REFRESH_EXPIRE!, privateKey: process.env.REFRESH_TOKEN!})
+        return await this.jwtService.generateToken(data, {expiresIn: process.env.REFRESH_EXPIRE!, secret: process.env.REFRESH_TOKEN!})
     }
  }
