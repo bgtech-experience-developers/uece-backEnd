@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/infra/database/prisma/prisma.service';
+import { PrismaService } from 'src/service/prisma.service';
 
 @Injectable()
 export class CourseRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   async findAll() {
-    return this.prisma.courses.findMany({
+    return this.prismaService.courses.findMany({
       select: {
         id: true,
       name: true,  // ajusta aqui se o campo correto for esse
@@ -15,5 +15,13 @@ export class CourseRepository {
         number_vacancies: true,
       },
     });
+  }
+
+  async findById(id: string) {
+    return await this.prismaService.courses.findUnique({
+      where: {
+        id
+      }
+    })
   }
 }

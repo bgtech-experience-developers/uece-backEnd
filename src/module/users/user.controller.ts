@@ -1,13 +1,18 @@
-import { Controller, Delete, Param, HttpCode } from '@nestjs/common';
-import { UserService } from './user.service';
 
-@Controller('users')
+import { Body, Controller, Delete, HttpCode, Param, Post } from "@nestjs/common";
+import { UserService } from "./user.service";
+import { CreateUserDTO } from "./dto/createUserDto";
+
+@Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService, ) {}
 
-  @Delete(':id')
-  @HttpCode(204)
-  async deleteUser(@Param('id') id: string): Promise<void> {
-    await this.userService.deleteUserById(id);
-  }
+
+
+    @Delete(':id')
+    @HttpCode(204)
+    async deleteUser(@Param('id') id: string): Promise<void> {
+        await this.userService.deleteUserById(id);
+    }
+
 }
