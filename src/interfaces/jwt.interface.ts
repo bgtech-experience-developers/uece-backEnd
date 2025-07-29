@@ -1,4 +1,4 @@
 export interface jwtOptions{
     expiresIn:string
-    privateKey: string
+    secret: string
 }
