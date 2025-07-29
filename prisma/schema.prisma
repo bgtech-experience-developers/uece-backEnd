@@ -13,8 +13,9 @@ model users {
   name String
   mother_name String
   cpf String @unique()
-  email String 
+  email String @unique
   data_birth DateTime
+  password String
 
   address_id String
   address address @relation(fields: [address_id], references: [id])
