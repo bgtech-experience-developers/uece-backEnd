@@ -2,9 +2,10 @@ import { Body, Controller, Get, Post, Res, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/loginDto";
 import { Response } from "express";
-import { RefreshTokenGuard } from "./guard/refreshToken.guard";
+// import { RefreshTokenGuard } from "./guard/refreshToken.guard";
 import { User } from "src/decorator/req.user.decorator";
-import { payloadUser } from "src/interfaces/payloadUser.interface";
+import { IpayloadTokenUser } from "./interface/payloadTokenUser.interface";
+
 
 @Controller('auth')
 export class AuthController {
@@ -23,9 +24,9 @@ export class AuthController {
         return dataResponse
     }
 
-    @UseGuards(RefreshTokenGuard)
-    @Post('/refresh-token')
-    async refreshToken(@User() user: payloadUser) {
-        return await this.authService.issueTokenAcess<payloadUser>(user);
-    }
+    // @UseGuards(RefreshTokenGuard)
+    // @Post('/refresh-token')
+    // async refreshToken(@User() user: IpayloadTokenUser) {
+    //     return await this.authService.issueTokenAcess<IpayloadTokenUser>(user);
+    // }
 }   

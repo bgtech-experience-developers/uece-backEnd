@@ -10,8 +10,6 @@ export class CourseRepository {
       select: {
         id: true,
       name: true,  // ajusta aqui se o campo correto for esse
-       registration_fee: true,
-        address_id: true,
         number_vacancies: true,
       },
     });
@@ -23,5 +21,12 @@ export class CourseRepository {
         id
       }
     })
+  }
+  async loadCoursesByDepartamentId(departamentId:string){
+    return await this.prismaService.$queryRaw`SELECT c.* 
+FROM departament_course AS ds
+INNER JOIN courses AS c ON c.id = ds.course_id
+WHERE ds.departament_id = ${departamentId};
+`
   }
 }
