@@ -9,7 +9,7 @@
     "seed": "ts-node seed.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start":  "nest start",
+    "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -21,7 +21,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dump": "pg_dump -h localhost -U postgres -d uece --data-only > prisma/dump.sql",
     "dump:insert": "psql -U postgres -d seu banco -h localhost < prisma/dump.sql"
-
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -50,6 +49,7 @@
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
+    "@types/multer": "^2.0.0",
     "@types/node": "^22.10.7",
     "@types/passport": "^1.0.17",
     "@types/passport-jwt": "^4.0.1",
