@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CourseService } from './course.service';
 
 @Controller('courses')
@@ -9,5 +9,9 @@ export class CourseController {
   async getCourses() {
     const courses = await this.courseService.listCourses();
     return courses
+  }
+  @Get('/list-by-departament/:departamentId')
+  async loadCoursesByDepartament(@Param('departamentId') departamentId:string){
+    return await this.courseService.loadCoursesThroughDepartament(departamentId)
   }
 }

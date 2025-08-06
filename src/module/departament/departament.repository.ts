@@ -10,4 +10,7 @@ export class DepartamentRepository{
     async loadDepartamentById(id:string){
         return await this.prismaService.departament.findUnique({where:{id}})
     }
+    async getUniqueDepartamentById(id:string){
+        return await this.prismaService.departament.findUnique({where:{id}})
+    }
 }

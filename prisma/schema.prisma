@@ -41,7 +41,6 @@ model Subscribe{
 }
 model departament {
 id String @id() @default(uuid())
-address_id String
 name String
 subscribe Subscribe[]
 }
@@ -56,13 +55,10 @@ model departament_course{
 model courses {
   id String @id() @default(uuid())
   name String
-  registration_fee Decimal
   number_vacancies Int
-  address_id String
   created_at DateTime @default(now())
   update_at DateTime @updatedAt()
 
-  address address @relation(fields: [address_id], references: [id], onUpdate: Cascade) 
   Subscribe Subscribe[]
 }
 
@@ -74,7 +70,6 @@ model address {
   neighborhood  String @db.VarChar(50)
   street        String @db.VarChar(50)
   number        String @db.VarChar(10)
-  courses       courses[]
   Subscribe Subscribe[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt()
