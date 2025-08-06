@@ -1,7 +1,8 @@
 import { BadRequestException } from '@nestjs/common';
 import { existsSync } from 'fs';
 
-import { AllowedFileTypesEnum } from './types/AllowedTypes.types';
+import { AllowedFileTypes, AllowedFileTypesEnum } from './types/AllowedTypes.types';
+import { AllowedDirectoryType } from './types/AllowedDirectory.type';
 
 export default class UploadsUtils {
   public static getUniqueName(fileName: string, directoryPath: string): string {
@@ -22,15 +23,20 @@ export default class UploadsUtils {
     return uniqueFileName;
   }
 
-  // public static getExceptionFactory(typeFile: AllowedFileTypesEnum): (error: string) => void {
-  //   return (error: string) => {
-  //     if (error === 'File is required')
-  //       throw new BadRequestException("Atributo 'file' é obrigatório");
-  //     if (error === `Validation failed (expected type is ${typeFile})`)
-  //       throw new BadRequestException('Arquivo inválido');
+  public static getExceptionFactory(typeFile:AllowedFileTypes): (error: string) => void {
+    console.log('ola mundo chegueio aqui')
+    return (error: string) => {
+      console.log(error)
+      if (error === 'File is required')
+        throw new BadRequestException("Atributo 'file' é obrigatório");
+      if (error === `Validation failed (expected type is ${typeFile})`)
+        throw new BadRequestException('Arquivo inválido');
     
 
-  //     throw new BadRequestException("erro inesperado")
-  //   };
-  // }
+      throw new BadRequestException("erro inesperado aaaa")
+    };
+  }
+public static generateRegexDynamicTypes(mimeTypes:string[]){
+  return new RegExp(`(${mimeTypes.join('|')})`, 'i');
+}
 }

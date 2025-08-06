@@ -14,7 +14,7 @@ import { DepartamentModule } from './module/departament/departament.module';
 import { UploadModule } from './module/uploads/upload.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),CourseModule, UserModule,DepartamentModule, AuthModule,GeoLocationModule,GuardMOdule,MailerModule,SubscribeModule],
+  imports: [ConfigModule.forRoot(),CourseModule, UserModule,DepartamentModule, AuthModule,GeoLocationModule,GuardMOdule,MailerModule,SubscribeModule,UploadModule],
 
 
   controllers: [AppController],
