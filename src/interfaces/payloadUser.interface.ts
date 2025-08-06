@@ -1,5 +1,3 @@
-export interface payloadUser {
-    id: string,
-    email: string
-    cpf: string
+export interface IpayloadUser {
+   email:string
 }

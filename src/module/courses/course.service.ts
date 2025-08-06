@@ -9,9 +9,7 @@ export class CourseService {
     return this.courseRepository.findAll();
   }
 
-  async findByIdExists(id: string): Promise<void> {
-    if(!await this.courseRepository.findById(id)) {
-      throw new NotFoundException("Curso inexistente")
-    }
-  }
+  async findByIdExists(id: string){
+    return await this.courseRepository.findById(id) 
  }
+}

@@ -7,8 +7,4 @@ export class CreateUserDTO {
     @ValidateNested()
     @Type(() => UserDto)
     user: UserDto
-
-    @ValidateNested()
-    @Type(() => CreateAddressDto)
-    address: CreateAddressDto
 }

@@ -10,36 +10,34 @@ import { UserDto } from "./dto/userDto";
 export class UserRepository {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async save(data: UserDto, addressId: string): Promise<createdUser> {
-        return await this.prismaService.users.create({
-            data: {
-                ...data,
-                address_id: addressId
-            }
-        })
+    async save(data: UserDto): Promise<createdUser> {
+       return  await this.prismaService.users.create({data:{...data}})
+
     }
 
-    async findByUnique(cpf: string): Promise<findUnique | null> {
-        return await this.prismaService.users.findUnique({
-            where: {
-                cpf
-            }
-        })
-    }
+    // async findByUnique(cpf: string): Promise<findUnique | null> {
+    //     return await this.prismaService.users.findUnique({
+    //         where: {
+    //             cpf
+    //         }
+    //     })
+    // }
 
-    async associateUserCourse(userId: string, courseId: string) {
-        return this.prismaService.courses_users.create({
-            data: {
-                user_id: userId,
-                course_id: courseId
-            }
-        })
-    }
+    // async associateUserCourse(userId: string, courseId: string) {
+    //     return this.prismaService.courses_users.create({
+    //         data: {
+    //             user_id: userId,
+    //             course_id: courseId
+    //         }
+    //     })
+    // }
 
     async findById(id: string) {
     return this.prismaService.users.findUnique({ where: { id } });
     }
-
+    async getById(id:string){
+        return await this.prismaService.users.findUnique({where:{id}})
+    }
     async deleteById(id: string) {
     return this.prismaService.users.delete({ where: { id } });
     }

@@ -3,7 +3,8 @@ import { UserService } from "../users/user.service";
 import { LoginDto } from "./dto/loginDto";
 import { BcryptService } from "src/service/bcrypt.service";
 import { JwtService } from "src/service/jwt.service";
-import { payloadUser } from "src/interfaces/payloadUser.interface";
+
+import { IpayloadTokenUser } from "./interface/payloadTokenUser.interface";
 
 @Injectable()
 export class AuthService {
@@ -21,8 +22,8 @@ export class AuthService {
         if(!isEqual) throw new BadRequestException("Usuário não autorizado!");
 
         
-        const acessToken = await this.issueTokenAcess<payloadUser>({id: userExist.id, email: userExist.email, cpf: userExist.cpf});
-        const refreshToken = await this.issueRefreshToken<payloadUser>({id: userExist.id, email: userExist.email, cpf: userExist.cpf});
+        const acessToken = await this.issueTokenAcess<IpayloadTokenUser>({id: userExist.id, email: userExist.email,is_subscribe:userExist.is_subscribe });
+        const refreshToken = await this.issueRefreshToken<IpayloadTokenUser>({id: userExist.id, email: userExist.email,is_subscribe:userExist.is_subscribe});
 
         return { userExist, acessToken, refreshToken };
     }
