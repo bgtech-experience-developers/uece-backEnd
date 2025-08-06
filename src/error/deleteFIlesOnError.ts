@@ -19,7 +19,7 @@ export default class DeleteFileOnErrorFilter implements ExceptionFilter {
     const status = exception.getStatus();
 
     const file = request.file;
-
+    console.log(file)
     if (file) {
       try {
         unlinkSync(file.path);

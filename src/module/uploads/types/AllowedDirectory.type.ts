@@ -1,3 +1,3 @@
 
-export const allowedDirectories = ['edital','profile'] as const
+export const allowedDirectories = ['laudo'] as const
 export type AllowedDirectoryType =(typeof allowedDirectories[number])
