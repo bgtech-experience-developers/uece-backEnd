@@ -11,9 +11,12 @@ import { GuardMOdule } from './guard/manager.guard';
 import { MailerModule } from './module/mail/mail.module';
 import { SubscribeModule } from './module/subscribe/subscribe.module';
 import { DepartamentModule } from './module/departament/departament.module';
+import { UploadModule } from './module/uploads/upload.module';
 
 @Module({
   imports: [ConfigModule.forRoot(),CourseModule, UserModule,DepartamentModule, AuthModule,GeoLocationModule,GuardMOdule,MailerModule,SubscribeModule],
+
+
   controllers: [AppController],
   providers: [AppService],
 })
